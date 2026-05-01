@@ -79,9 +79,9 @@ public abstract class TelaBase<T> where T : EntidadeBase
         do
         {
             Console.Write("Digite o ID do registro que deseja editar (ou S para sair): ");
-            idSelecionado = Console.ReadLine()?.ToUpper() ?? string.Empty;
+            idSelecionado = Console.ReadLine() ?? string.Empty;
 
-            if (idSelecionado == "S")
+            if (idSelecionado.ToUpper() == "S")
                 return;
 
             if (idSelecionado.Length == 7)
@@ -127,7 +127,7 @@ public abstract class TelaBase<T> where T : EntidadeBase
         ExibirMensagem($"O registro \"{idSelecionado}\" foi editado com sucesso.");
     }
 
-    public void Excluir() //Em TelaBase.cs
+    public void Excluir()
     {
         ExibirCabecalho("Exclusão de Caixa");
 

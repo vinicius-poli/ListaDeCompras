@@ -1,4 +1,5 @@
 using ListaDeCompras.ConsoleApp.Compartilhado;
+using ListaDeCompras.ConsoleApp.ModuloItem;
 
 namespace ListaDeCompras.ConsoleApp.ModuloLista;
 
@@ -6,10 +7,12 @@ public class Lista : EntidadeBase
 {
     public string Nome { get; private set; }
     public DateTime DataAbertura { get; private set; } = DateTime.Now;
+    public List<Item> Item { get; private set; }
 
-    public Lista(string nome)
+    public Lista(string nome, List<Item> item)
     {
-        Nome = nome;        
+        Nome = nome;
+        Item = item;        
     }
 
     public override string[] Validar()

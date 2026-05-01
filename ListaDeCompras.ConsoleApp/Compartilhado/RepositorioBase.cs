@@ -23,7 +23,7 @@ public abstract class RepositorioBase<T> where T : EntidadeBase // constraint / 
         return true;
     }
 
-    public bool Excluir(string idSelecionado)
+    public bool Excluir(string idSelecionado) //Em RepositorioBase.cs
     {
         T? registroSelecionado = SelecionarPorId(idSelecionado);
 
@@ -50,4 +50,6 @@ public abstract class RepositorioBase<T> where T : EntidadeBase // constraint / 
     {
         return registros;
     }
+
+    
 }

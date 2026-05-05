@@ -25,8 +25,7 @@ public class TelaPrincipal
         Console.WriteLine("---------------------------------");
         Console.WriteLine("1 - Gerenciar categorias");
         Console.WriteLine("2 - Gerenciar produtos");
-        Console.WriteLine("3 - Gerenciar listas de compras");
-        Console.WriteLine("4 - Gerenciar itens de listas de compras");
+        Console.WriteLine("3 - Gerenciar listas de compras");        
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -39,7 +38,7 @@ public class TelaPrincipal
             return new TelaProduto(repositorioProduto, repositorioCategoria);
 
         if (opcaoMenuPrincipal == "3")
-            return new TelaLista(repositorioLista);
+            return new TelaLista(repositorioLista, repositorioProduto);
 
         return null;
     }

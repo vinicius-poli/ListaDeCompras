@@ -7,9 +7,9 @@ namespace ListaDeCompras.ConsoleApp.ModuloProduto;
 
 public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
 {
-    private RepositorioCategoria repositorioCategoria;
+    private readonly RepositorioCategoria repositorioCategoria;
     
-    public TelaProduto(RepositorioProduto repositorio, RepositorioCategoria repositorioCategoria) : base("Produto", repositorio)
+    public TelaProduto(RepositorioProduto repositorioProduto, RepositorioCategoria repositorioCategoria) : base("Produto", repositorioProduto)
     {
         this.repositorioCategoria = repositorioCategoria;        
     }
@@ -41,7 +41,7 @@ public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
         {            
             Console.WriteLine(
                 "{0, -7} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
-                p.Id, p.Nome, p.Categoria.Nome, p.UnidadeMedida, "R$ " + p.PrecoAproximado
+                p.Id, p.Nome, p.Categoria.Nome, p.UnidadeMedida, p.PrecoAproximado.ToString("C2")
             );
         }        
 
@@ -66,22 +66,24 @@ public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
         string unidadeMedida = Console.ReadLine() ?? string.Empty;
 
         Console.Write("Digite o preço aproximado do produto: ");
-        string precoAproximado = Console.ReadLine() ?? string.Empty;      
+        decimal precoAproximado = Convert.ToDecimal(Console.ReadLine());      
 
         return new Produto(nome, categoriaSelecionada, unidadeMedida, precoAproximado);
     }
 
     private string SelecionarCategoria()
     {
+        List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
+
         Console.WriteLine("---------------------------------");
+  
 
         Console.WriteLine(
             "{0, -7} | {1, -20} | {2, -10}",
             "Id", "Nome", "Cor"
         );
 
-       List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
-
+       
         foreach (Categoria c in categorias)
         {
             string corSelecionada = c.Cor;

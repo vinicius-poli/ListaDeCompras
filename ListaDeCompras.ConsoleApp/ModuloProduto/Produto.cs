@@ -8,9 +8,9 @@ public class Produto : EntidadeBase
     public string Nome { get; private set; }
     public Categoria Categoria { get; private set; }
     public string UnidadeMedida { get; private set; }
-    public string PrecoAproximado { get; private set; }
+    public decimal PrecoAproximado { get; private set; }
 
-    public Produto(string nome, Categoria categoria, string unidadeMedida, string precoAproximado)
+    public Produto(string nome, Categoria categoria, string unidadeMedida, decimal precoAproximado)
     {
         Nome = nome;
         Categoria = categoria;
@@ -26,12 +26,12 @@ public class Produto : EntidadeBase
             erros += "O campo \"Nome\" deve conter entre 0 e 50 caracteres;";
 
         if (Categoria == null)
-            erros += "O campo \"Categoria\" deve conter uma caixa válida;";
+            erros += "O campo \"Categoria\" deve conter uma categoria válida;";
 
         if (string.IsNullOrWhiteSpace(UnidadeMedida))
             erros += "O campo \"Unidade de Medida\" deve ser preenchido;";
 
-        if (string.IsNullOrWhiteSpace(PrecoAproximado))
+        if (PrecoAproximado == 0)
             erros += "O campo \"Preco Aproximado\" deve ser preenchido;";        
 
         return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);

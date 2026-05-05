@@ -1,23 +1,32 @@
-using ListaDeCompras.ConsoleApp.Compartilhado;
+using System.Security.Cryptography;
 using ListaDeCompras.ConsoleApp.ModuloProduto;
-using ListaDeCompras.ConsoleApp.ModuloLista;
 
-namespace ListaDeCompras.ConsoleApp.ModuloItem;
+
+namespace ListaDeCompras.ConsoleApp.ModuloLista;
 
 public class Item
 {
+    public string Id { get; set; }
     public int Quantidade { get; private set; }
 
     public Produto Produto { get; private set;}
 
-    public Lista Lista { get; private set;}
-
-    public Item(int quantidade, Produto produto, Lista lista)
+    public decimal Preco
     {
+        get
+        {
+            return Produto.PrecoAproximado * Quantidade;
+        }
+    }    
+
+    public Item(int quantidade, Produto produto)
+    {
+        Id = Convert.ToHexString(RandomNumberGenerator.GetBytes(4)).ToLower().Substring(0, 7);
+
         Quantidade = quantidade;
-        Produto = produto;
-        Lista = lista;
+        Produto = produto;        
     }
+    
 
     public string[] Validar()
     {

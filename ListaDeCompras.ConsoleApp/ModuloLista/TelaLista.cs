@@ -5,10 +5,10 @@ namespace ListaDeCompras.ConsoleApp.ModuloLista;
 
 public class TelaLista : TelaBase<Lista>, ITelaOpcoes, ITelaCrud
 {
-    private readonly RepositorioProduto repositorioProduto;
+    private readonly RepositorioProdutoEmMemoria repositorioProduto;
 
-    public TelaLista(RepositorioLista repositorioLista,
-    RepositorioProduto repositorioProduto) : base("Lista de Compras", repositorioLista)
+    public TelaLista(RepositorioListaEmMemoria repositorioLista,
+    RepositorioProdutoEmMemoria repositorioProduto) : base("Lista de Compras", repositorioLista)
     {
         this.repositorioProduto = repositorioProduto;
     }

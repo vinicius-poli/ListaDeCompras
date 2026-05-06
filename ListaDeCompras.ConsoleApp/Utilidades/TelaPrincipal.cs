@@ -1,4 +1,5 @@
 using ListaDeCompras.ConsoleApp.Compartilhado;
+using ListaDeCompras.ConsoleApp.Compartilhado.Memoria;
 using ListaDeCompras.ConsoleApp.ModuloCategoria;
 using ListaDeCompras.ConsoleApp.ModuloProduto;
 using ListaDeCompras.ConsoleApp.ModuloLista;
@@ -7,9 +8,9 @@ namespace ListaDeCompras.ConsoleApp.Utilidades;
 
 public class TelaPrincipal
 {
-    private readonly RepositorioCategoria repositorioCategoria = new RepositorioCategoria();
-    private readonly RepositorioProduto repositorioProduto = new RepositorioProduto();
-    private readonly RepositorioLista repositorioLista = new RepositorioLista();
+    private readonly RepositorioCategoriaEmMemoria repositorioCategoria = new RepositorioCategoriaEmMemoria();
+    private readonly RepositorioProdutoEmMemoria repositorioProduto = new RepositorioProdutoEmMemoria();
+    private readonly RepositorioListaEmMemoria repositorioLista = new RepositorioListaEmMemoria();
 
     public TelaPrincipal()
     {

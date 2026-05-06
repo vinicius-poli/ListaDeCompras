@@ -7,9 +7,9 @@ namespace ListaDeCompras.ConsoleApp.ModuloProduto;
 
 public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
 {
-    private readonly RepositorioCategoria repositorioCategoria;
+    private readonly RepositorioCategoriaEmMemoria repositorioCategoria;
     
-    public TelaProduto(RepositorioProduto repositorioProduto, RepositorioCategoria repositorioCategoria) : base("Produto", repositorioProduto)
+    public TelaProduto(RepositorioProdutoEmMemoria repositorioProduto, RepositorioCategoriaEmMemoria repositorioCategoria) : base("Produto", repositorioProduto)
     {
         this.repositorioCategoria = repositorioCategoria;        
     }

@@ -1,9 +1,19 @@
 ﻿﻿using ListaDeCompras.ConsoleApp.Compartilhado;
+using ListaDeCompras.ConsoleApp.Compartilhado.Arquivos;
+using ListaDeCompras.ConsoleApp.ModuloCategoria;
 using ListaDeCompras.ConsoleApp.ModuloLista;
+using ListaDeCompras.ConsoleApp.ModuloProduto;
 using ListaDeCompras.ConsoleApp.Utilidades;
 
+ContextoJson contexto = new ContextoJson();
+contexto.Carregar();
 
-TelaPrincipal telaPrincipal = new TelaPrincipal();
+RepositorioCategoriaEmArquivo repositorioCategoria = new RepositorioCategoriaEmArquivo(contexto);
+RepositorioProdutoEmArquivo repositorioProduto = new RepositorioProdutoEmArquivo(contexto);
+RepositorioListaEmArquivo repositorioLista = new RepositorioListaEmArquivo(contexto);
+
+
+TelaPrincipal telaPrincipal = new TelaPrincipal(repositorioCategoria, repositorioProduto, repositorioLista);
 
 while (true)
 {

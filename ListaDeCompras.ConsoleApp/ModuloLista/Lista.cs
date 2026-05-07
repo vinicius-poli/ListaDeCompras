@@ -23,6 +23,11 @@ public class Lista : EntidadeBase
         }
     }
 
+    public Lista()
+    {
+        
+    }
+
     public Lista(string nome)
     {
         Nome = nome;

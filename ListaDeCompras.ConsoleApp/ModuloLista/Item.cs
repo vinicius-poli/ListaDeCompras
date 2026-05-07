@@ -7,9 +7,9 @@ namespace ListaDeCompras.ConsoleApp.ModuloLista;
 public class Item
 {
     public string Id { get; set; }
-    public int Quantidade { get; private set; }
+    public int Quantidade { get; set; }
 
-    public Produto Produto { get; private set;}
+    public Produto Produto { get; set;}
 
     public decimal Preco
     {
@@ -17,6 +17,11 @@ public class Item
         {
             return Produto.PrecoAproximado * Quantidade;
         }
+    }
+
+    public Item()
+    {
+        
     }    
 
     public Item(int quantidade, Produto produto)

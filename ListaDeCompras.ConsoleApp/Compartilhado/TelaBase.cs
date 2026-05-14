@@ -35,35 +35,49 @@ public abstract class TelaBase<T> where T : EntidadeBase
     {
         ExibirCabecalho($"Cadastro de {nomeEntidade}");
 
-        T novaEntidade = ObterDadosCadastrais();
-
-        string[] erros = novaEntidade.Validar();
-
-        if (erros.Length > 0)
+        try
         {
-            Console.WriteLine("---------------------------------");
+            T novaEntidade = ObterDadosCadastrais();
 
-            Console.ForegroundColor = ConsoleColor.Red;
+            string[] erros = novaEntidade.Validar();
 
-            for (int i = 0; i < erros.Length; i++)
+            if (erros.Length > 0)
             {
-                string erro = erros[i];
+                Console.WriteLine("---------------------------------");
 
-                Console.WriteLine(erro);
+                Console.ForegroundColor = ConsoleColor.Red;
+
+                for (int i = 0; i < erros.Length; i++)
+                {
+                    string erro = erros[i];
+
+                    Console.WriteLine(erro);
+                }
+
+                Console.ResetColor();
+                Console.WriteLine("---------------------------------");
+                Console.Write("Digite ENTER para continuar...");
+                Console.ReadLine();
+
+                Cadastrar();
+                return;
             }
 
-            Console.ResetColor();
-            Console.WriteLine("---------------------------------");
-            Console.Write("Digite ENTER para continuar...");
-            Console.ReadLine();
+            repositorio.Cadastrar(novaEntidade);
 
+            ExibirMensagem($"O registro \"{novaEntidade.Id}\" foi cadastrado com sucesso!");
+        } 
+        catch(FormatException)
+        {
+            ExibirMensagem("O formato do valor de um dos campos está inválido");
             Cadastrar();
-            return;
         }
-
-        repositorio.Cadastrar(novaEntidade);
-
-        ExibirMensagem($"O registro \"{novaEntidade.Id}\" foi cadastrado com sucesso!");
+        catch (Exception)
+        {
+            ExibirMensagem("Ocorreu um erro inesperado. Tente novamente.");
+            Cadastrar();
+        }       
+        
     }
 
     public void Editar()
@@ -90,41 +104,55 @@ public abstract class TelaBase<T> where T : EntidadeBase
 
         Console.WriteLine("---------------------------------");
 
-        T novaEntidade = ObterDadosCadastrais();
-
-        string[] erros = novaEntidade.Validar();
-
-        if (erros.Length > 0)
+        try
         {
-            Console.WriteLine("---------------------------------");
+            T novaEntidade = ObterDadosCadastrais();
 
-            Console.ForegroundColor = ConsoleColor.Red;
+            string[] erros = novaEntidade.Validar();
 
-            for (int i = 0; i < erros.Length; i++)
+            if (erros.Length > 0)
             {
-                string erro = erros[i];
+                Console.WriteLine("---------------------------------");
 
-                Console.WriteLine(erro);
+                Console.ForegroundColor = ConsoleColor.Red;
+
+                for (int i = 0; i < erros.Length; i++)
+                {
+                    string erro = erros[i];
+
+                    Console.WriteLine(erro);
+                }
+
+                Console.ResetColor();
+                Console.WriteLine("---------------------------------");
+                Console.Write("Digite ENTER para continuar...");
+                Console.ReadLine();
+
+                Editar();
+                return;
             }
 
-            Console.ResetColor();
-            Console.WriteLine("---------------------------------");
-            Console.Write("Digite ENTER para continuar...");
-            Console.ReadLine();
+            bool conseguiuEditar = repositorio.Editar(idSelecionado, novaEntidade);
 
-            Editar();
-            return;
+            if (!conseguiuEditar)
+            {
+                ExibirMensagem("Não foi possível encontrar o registro requisitado.");
+                return;
+            }
+
+            ExibirMensagem($"O registro \"{idSelecionado}\" foi editado com sucesso.");
         }
-
-        bool conseguiuEditar = repositorio.Editar(idSelecionado, novaEntidade);
-
-        if (!conseguiuEditar)
+        catch(FormatException)
         {
-            ExibirMensagem("Não foi possível encontrar o registro requisitado.");
-            return;
+            ExibirMensagem("O formato do valor de um dos campos está inválido");
+            Editar();
         }
-
-        ExibirMensagem($"O registro \"{idSelecionado}\" foi editado com sucesso.");
+        catch (Exception)
+        {
+            ExibirMensagem("Ocorreu um erro inesperado. Tente novamente.");
+            Editar();
+        }       
+        
     }
 
     public void Excluir()

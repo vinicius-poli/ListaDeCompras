@@ -5,7 +5,7 @@ namespace ListaDeCompras.ConsoleApp.ModuloCategoria;
 
 public class TelaCategoria : TelaBase<Categoria>, ITelaOpcoes, ITelaCrud
 {
-    public TelaCategoria(RepositorioCategoriaEmArquivo repositorioCategoria) : base("Categoria", repositorioCategoria)
+    public TelaCategoria(IRepositorio<Categoria> repositorioCategoria) : base("Categoria", repositorioCategoria)
     {        
     }
 

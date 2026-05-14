@@ -1,14 +1,11 @@
-using ListaDeCompras.ConsoleApp.Compartilhado.Arquivos;
-using ListaDeCompras.ConsoleApp.Compartilhado.Memoria;
-
 namespace ListaDeCompras.ConsoleApp.Compartilhado;
 
 public abstract class TelaBase<T> where T : EntidadeBase
 {
     public string nomeEntidade = string.Empty;
-    protected RepositorioBaseEmArquivo<T> repositorio;
+    protected IRepositorio<T> repositorio;
 
-    protected TelaBase(string nomeEntidade, RepositorioBaseEmArquivo<T> repositorio)
+    protected TelaBase(string nomeEntidade, IRepositorio<T> repositorio)
     {
         this.nomeEntidade = nomeEntidade;
         this.repositorio = repositorio;
@@ -152,9 +149,9 @@ public abstract class TelaBase<T> where T : EntidadeBase
                 break;
         } while (true);
 
-        bool conseguiuExcluir = repositorio.Excluir(idSelecionado);
+        T? registroSelecionado = repositorio.SelecionarPorId(idSelecionado);
 
-        if (!conseguiuExcluir)
+        if (registroSelecionado == null)
         {
             ExibirMensagem("Não foi possível encontrar o registro requisitado.");
             return;

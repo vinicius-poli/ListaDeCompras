@@ -7,14 +7,14 @@ namespace ListaDeCompras.ConsoleApp.Utilidades;
 
 public class TelaPrincipal
 {
-    private readonly RepositorioCategoriaEmArquivo repositorioCategoria;
-    private readonly RepositorioProdutoEmArquivo repositorioProduto;
-    private readonly RepositorioListaEmArquivo repositorioLista;
+    private readonly IRepositorio<Categoria> repositorioCategoria;
+    private readonly IRepositorio<Produto> repositorioProduto;
+    private readonly IRepositorio<Lista> repositorioLista;
 
     public TelaPrincipal(
-        RepositorioCategoriaEmArquivo repositorioCategoria, 
-        RepositorioProdutoEmArquivo repositorioProduto, 
-        RepositorioListaEmArquivo repositorioLista
+        IRepositorio<Categoria> repositorioCategoria, 
+        IRepositorio<Produto> repositorioProduto, 
+        IRepositorio<Lista> repositorioLista
     )
     {
         this.repositorioCategoria = repositorioCategoria;

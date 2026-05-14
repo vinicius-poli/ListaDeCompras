@@ -7,9 +7,12 @@ namespace ListaDeCompras.ConsoleApp.ModuloProduto;
 
 public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
 {
-    private readonly RepositorioCategoriaEmArquivo repositorioCategoria;
+    private readonly IRepositorio<Categoria> repositorioCategoria;
     
-    public TelaProduto(RepositorioProdutoEmArquivo repositorioProduto, RepositorioCategoriaEmArquivo repositorioCategoria) : base("Produto", repositorioProduto)
+    public TelaProduto(
+        IRepositorio<Produto> repositorioProduto,
+        IRepositorio<Categoria> repositorioCategoria
+    ) : base("Produto", repositorioProduto)
     {
         this.repositorioCategoria = repositorioCategoria;        
     }
@@ -60,7 +63,7 @@ public class TelaProduto : TelaBase<Produto>, ITelaOpcoes, ITelaCrud
 
         string idSelecionado = SelecionarCategoria();
 
-        Categoria? categoriaSelecionada = repositorioCategoria.SelecionarPorId(idSelecionado);
+        Categoria? categoriaSelecionada = repositorioCategoria.SelecionarPorId(idSelecionado)!;
 
         Console.Write("Digite a unidade de medida do produto: ");
         string unidadeMedida = Console.ReadLine() ?? string.Empty;

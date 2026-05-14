@@ -23,6 +23,11 @@ public abstract class RepositorioBaseEmMemoria<T> where T : EntidadeBase // cons
         return true;
     }
 
+    public bool Excluir(T registro)
+    {
+        return registros.Remove(registro);
+    }
+
     public bool Excluir(string idSelecionado) //Em RepositorioBase.cs
     {
         T? registroSelecionado = SelecionarPorId(idSelecionado);

@@ -1,9 +1,10 @@
 using System;
+using ListaDeCompras.ConsoleApp.Compartilhado;
 using ListaDeCompras.ConsoleApp.Compartilhado.Arquivos;
 
 namespace ListaDeCompras.ConsoleApp.ModuloLista;
 
-public class RepositorioListaEmArquivo : RepositorioBaseEmArquivo<Lista>
+public class RepositorioListaEmArquivo : RepositorioBaseEmArquivo<Lista>, IRepositorio<Lista>
 {
     public RepositorioListaEmArquivo(ContextoJson contexto) : base(contexto)
     {
